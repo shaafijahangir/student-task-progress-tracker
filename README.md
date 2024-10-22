@@ -29,11 +29,9 @@ Want to get this running on your local machine? It’s super simple! Just follow
 4. **Run the database migrations**:
    ```bash
    python manage.py migrate
-   
 5. **Create a superuser (for admin access)**:
    ```bash
    python manage.py createsuperuser
-
 6. **Access the app**: Open your browser and head to http://127.0.0.1:8000 to start exploring!
    
 ## Contribute 🙌
