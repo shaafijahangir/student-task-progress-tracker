@@ -1,0 +1,18 @@
+{% extends "checkup/base.html" %}
+{% block content %}
+    <div class="content-section">
+    	<form method="POST">
+    		{% csrf_token %}
+
+    		<fieldset class="form-group">
+                <legend class="border-bottom mb-2">Delete Post?</legend>
+                <h2> <font size="+1"> Are you sure you want to delete this post: "{{ object.title }}"?</font></h2>
+            </fieldset>
+
+            <div class="form-group">
+            	<button class="btn btn-outline-danger" type="submit"> Yes, delete forever </button>
+                <a class="btn btn-outline-secondary" href="{% url 'post-detail' object.id %}"> Cancel </a>
+            </div>
+        </form>
+    </div>
+{% endblock content %}

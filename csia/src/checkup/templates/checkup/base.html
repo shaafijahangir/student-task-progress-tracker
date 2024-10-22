@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'checkup/main.css' %}">
+
+    {% if title %}
+        <title>Extended Essay Checkup - {{ title }}</title>
+    {% else %}
+        <title>Extended Essay Checkup</title>
+    {% endif %}
+
+
+</head>
+<body>
+    <header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+        <div class="container">
+          <a class="navbar-brand mr-4" href="{% url 'checkup-home' %}">Extended Essay Checkup</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+              <a class="nav-item nav-link" href="{% url 'checkup-home' %}">Home</a>
+              <a class="nav-item nav-link" href="{% url 'checkup-about' %}">About / Contacts</a>
+              <a class="nav-item nav-link" href="{% url 'checkup-advice' %}">Advice</a>
+              <a class="nav-item nav-link" href="{% url 'checkup-students' %}">Students</a>
+              <a class="nav-item nav-link" href="{% url 'checkup-FAQ' %}">FAQ</a>
+            
+            </div>
+            <!-- Navbar Right Side --> 
+            <div class="navbar-nav">
+
+              {% if user.is_authenticated %}
+                <a class="nav-item nav-link" href="{% url 'post-create' %}">Add Post</a>
+                <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
+                <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+              {% else %}
+                <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+                <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main role="main" class="container">
+      <div class="row">
+        <div class="col-md-7">
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+
+
+          {% block content %}
+          {% endblock %}
+
+          
+        </div>
+        <div class="col-md-5">
+          <div class="content-section">
+            <h3>12 Stages for EE Completion</h3>
+            <p class='text-muted'>Here are the 12 steps in the writing process that will guide you through your Extended Essay.
+              <ul class="list-group">
+                <li class="list-group-item list-group-item-light">1) Choose an available Diploma Program subject for the extended essay.</li>
+                <li class="list-group-item list-group-item-light">2) Read the following materials: assessment criteria, relevant subject-specific chapter of the EE guide, IB ethical guidelines, and other associated policies relevant, such as those relating to animal experiments.</li>
+                <li class="list-group-item list-group-item-light">3) Set up the Researchers Reflection Space (RRS) and use this as the key planning and reflection tool for the extended essay process.</li>
+                <li class="list-group-item list-group-item-light">4) Choose a topic and undertake some background reading on it. Choose a topic that you find interesting and challenging</li>
+                <li class="list-group-item list-group-item-light">5) Formulate a preliminary research question. Try to incorporate an IB command term in the research question if possible.</li>
+                <li class="list-group-item list-group-item-light">6) Draw up an outline plan for the research and writing process. This should include a timeline.</li>
+                <li class="list-group-item list-group-item-light">7) Begin to identify how and where source material for research will be gathered.</li>
+                <li class="list-group-item list-group-item-light">8) Identify which system of academic referencing will be used, ensuring that this meets the minimum requirements for IB.</li>
+                <li class="list-group-item list-group-item-light">9) Set deadlines that are realistic and take into consideration all the other deadlines related to classes and IB.</li>
+                <li class="list-group-item list-group-item-light">10) Plan a structure for the essay. This may change as the research develops but it is useful to have a sense of direction from the start.</li>
+                <li class="list-group-item list-group-item-light">11) Undertake some preparatory reading in light of the proposed research question. <i> If students discover that it will not be possible to obtain the evidence needed in the time available, the research question should be changed. This should be done sooner rather than later: students should not lose time waiting and hoping that something will turn up. Students should go back to stage 3,2, or 1, and choose a new research question that can be answered.</i> </li>
+                <li class="list-group-item list-group-item-light">12) Carry out the research. <i>The material collected should be assembled in a logical order, linked to the structure of the essay and clearly focused on the research question posed. Only then will students know whether they have enough evidence for each stage of the argument so that they can proceed to the next. Students should be prepared for things to go wrong. Sometimes they may discover something later in the research that undermines what they thought had been established earlier. If that happens, the research plan needs to be revised.</i> </li>
+              </ul>
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
+    
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+</html>
